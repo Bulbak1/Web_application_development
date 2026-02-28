@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% macro render_comment(comment) %}
+    <div class="d-flex mb-3">
+        <div class="flex-shrink-0 me-3">
+            <div class="bg-secondary rounded-circle" style="width: 50px; height: 50px;"></div>
+        </div>
+        <div class="media-body">
+            <h5 class="mt-0">{{ comment.author }}</h5>
+            <p>{{ comment.text }}</p>
+            {% if comment.replies %}
+                <div class="mt-3">
+                    {% for reply in comment.replies %}
+                        {{ render_comment(reply) }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% block content %}
+<div class="container wide-padding">
+    <h1 class="mt-5 pt-2">{{ post.title }}</h1>
+    <p class="lead">Автор: {{ post.author }}</p>
+    <p>Опубликовано: {{ post.date.strftime('%d.%m.%Y') }}</p>
+    <hr>
+    <img class="img-fluid rounded d-block mx-auto"
+         src="{{ url_for('static', filename='images/' + post.image_id) }}"
+         alt="Image for post"
+         style="width: 70%;">
+    <hr>
+    <p style="text-align: justify;">{{ post.text }}</p>
+    <hr>
+    
+    <div class="rounded overflow-hidden mb-4">
+        <div class="bg-secondary text-white p-3">
+            <h3 class="mb-0">Оставьте комментарий</h3>
+        </div>
+        <div class="bg-white p-3 border border-top-0">
+            <form method="post" action="#">
+                <div class="form-group">
+                    <textarea class="form-control" rows="3" placeholder="Ваш комментарий..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <h3>Комментарии</h3>
+    {% if post.comments %}
+        {% for comment in post.comments %}
+            {{ render_comment(comment) }}
+        {% endfor %}
+    {% else %}
+        <p>Пока нет комментариев.</p>
+    {% endif %}
+</div>
+{% endblock %}
