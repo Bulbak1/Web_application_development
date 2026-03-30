@@ -1,0 +1,18 @@
+body {
+    font-size: 1.25rem;
+}
+
+.avatar {
+    max-width: 100%;
+}
+
+.wide-padding {
+    padding-left: 5rem;  
+    padding-right: 5rem;
+}
+
+.navbar-nav .nav-link {
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
