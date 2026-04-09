@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container text-center">
+        <h1 class="hero-title">Аналитика курсов<br>как в киберспорте</h1>
+        <p class="hero-desc">
+            Объективные рейтинги, отзывы реальных игроков и глубокий анализ игры.
+            Сделано для тех, кто выбирает лучшее.
+        </p>
+        <div class="hero-search">
+            <form action="{{ url_for('courses.index') }}" class="row g-3 align-items-end">
+                <div class="col-md-6">
+                    <label for="course-name">Название курса</label>
+                    <input type="text" class="form-control" id="course-name" name="name" placeholder="Например: Гайд на PL">
+                </div>
+                <div class="col-md-4">
+                    <label for="course-category">Категория</label>
+                    <select class="form-select" id="course-category" name="category_ids">
+                        <option value="">Все категории</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn-primary w-100"><i class="fas fa-search me-1"></i> Найти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

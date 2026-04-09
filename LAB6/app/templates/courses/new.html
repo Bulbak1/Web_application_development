@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4"><i class="fas fa-plus-circle me-2" style="color: var(--accent);"></i> Создание курса</h2>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('courses.create') }}" enctype="multipart/form-data">
+                <input type="hidden" name="author_id" value="{{ current_user.id }}">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label>Название курса</label>
+                            <input class="form-control" type="text" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Категория</label>
+                            <select class="form-select" name="category_id">
+                                {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <!-- <div class="mb-3">
+                            <label>Преподаватели (multi)</label>
+                            <select class="form-select" name="teachers_ids" multiple>
+                                {% for user in users %}
+                                <option value="{{ user.id }}">{{ user.full_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div> -->
+                        <div class="mb-3">
+                            <label>Краткое описание</label>
+                            <textarea class="form-control" name="short_desc" rows="4" required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label>Фоновое изображение</label>
+                            <input class="form-control" type="file" name="background_img" accept="image/*" id="background_img" required>
+                        </div>
+                        <div class="background-preview p-3 text-center border rounded">
+                            <img src="#" class="img-fluid d-none" alt="">
+                            <label for="background_img" class="btn-primary" style="cursor:pointer;">Выбрать изображение</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Полное описание</label>
+                    <textarea class="form-control" name="full_desc" rows="8" required></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn-primary px-5"><i class="fas fa-save"></i> Сохранить курс</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

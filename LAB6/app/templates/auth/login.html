@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div class="card p-4" style="max-width: 400px; width: 100%;">
+        <h3 class="text-center mb-4"><i class="fas fa-key me-2"></i>Вход в систему</h3>
+        <form method="POST">
+            <div class="mb-3">
+                <label>Логин</label>
+                <input type="text" class="form-control" name="login" required>
+            </div>
+            <div class="mb-3">
+                <label>Пароль</label>
+                <input type="password" class="form-control" name="password" required>
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="remember_me" name="remember_me">
+                <label class="form-check-label" for="remember_me">Запомнить меня</label>
+            </div>
+            <button type="submit" class="btn-primary w-100"><i class="fas fa-sign-in-alt me-1"></i> Войти</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
